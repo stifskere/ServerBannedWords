@@ -1,7 +1,6 @@
 ﻿using System;
 using PluginAPI;
 using PluginAPI.Enums;
-using PluginAPI.Interfaces;
 using PluginAPI.Events;
 using PluginAPI.Events.EventArgs;
 
@@ -27,7 +26,7 @@ namespace ServerBannedWords
             PlayerEvents.PlayerChat -= OnChat;
         }
 
-        public void OnChat(PlayerChatEvent ev)
+        private void OnChat(PlayerChatEvent ev)
         {
             if (ev.Finalized)
             {
@@ -39,16 +38,9 @@ namespace ServerBannedWords
                 if (ev.Message.ToLower().Contains(bannedWord.ToLower()))
                 {
                     ev.Disallow();
-                    ev.Player.SendPlayerChatMessage(Config.HintMessage);
+                    ev.Player.SendChatMessage(Config.HintMessage);
                 }
             }
         }
-    }
-
-    public class PluginConfig : IConfig
-    {
-        public bool IsEnabled { get; set; } = true;
-        public string HintMessage { get; set; } = "<color=#FF0000>This word is not allowed in this server</color>";
-        public string[] BannedWords { get; set; } = { "Fuck", "Shit" };
     }
 }
