@@ -24,7 +24,6 @@ namespace ServerBannedWords
         public override void OnDisabled()
         {
             base.OnDisabled();
-            Log.Info("The plugin is disabled, enable it in the config file for the plugin");
             PlayerEvents.PlayerChat -= OnChat;
         }
 
