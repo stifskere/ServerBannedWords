@@ -32,13 +32,14 @@ namespace ServerBannedWords
             {
                 return;
             }
-
+            
+            
             foreach (string bannedWord in Config.BannedWords)
             {
                 if (ev.Message.ToLower().Contains(bannedWord.ToLower()))
                 {
                     ev.Disallow();
-                    ev.Player.SendChatMessage(Config.HintMessage);
+                    ev.Player.SendChatMessage(Config.HintMessage.Replace("%BANNEDWORD%", bannedWord.ToLower()));
                 }
             }
         }
